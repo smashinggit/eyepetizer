@@ -1,0 +1,93 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+}
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('../key.jks')
+            storePassword '123456789'
+            keyPassword '123456789'
+            keyAlias 'key0'
+        }
+    }
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+
+        applicationId "com.cs.eyepetizer"
+        versionCode 6
+        versionName "6.0.3"
+
+        multiDexEnabled true
+
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
+//            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$kotlin_core_ktx"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    implementation "com.google.android.material:material:$material"
+
+    implementation project(":common")
+
+
+    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖
+    implementation 'com.scwang.smart:refresh-header-material:2.0.3'    //谷歌刷新头
+    implementation 'com.scwang.smart:refresh-header-classics:2.0.3'    //经典刷新头
+    implementation 'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
+    implementation 'com.youth.banner:banner:2.1.0'                     //轮播图
+    implementation 'com.permissionx.guolindev:permissionx:1.4.0'       //权限请求
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'           // 状态栏  基础依赖包，必须要依赖
+    implementation 'com.gyf.immersionbar:immersionbar-ktx:3.0.0'       // kotlin扩展（可选）
+
+    implementation 'org.greenrobot:eventbus:3.2.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    implementation 'com.tencent.sonic:sdk:3.1.0'                  //提升H5加载速度框架
+
+
+    implementation 'com.shuyu:GSYVideoPlayer:8.0.0'                    //视频播放
+    //根据你的需求ijk模式的so
+    implementation 'com.shuyu:gsyVideoPlayer-armv7a:8.0.0'
+    implementation 'com.shuyu:gsyVideoPlayer-arm64:8.0.0'
+    implementation 'com.shuyu:gsyVideoPlayer-x64:8.0.0'
+    implementation 'com.shuyu:gsyVideoPlayer-x86:8.0.0'
+
+
+    //友盟
+    implementation "com.umeng.umsdk:common:9.3.3" // 统计SDK（必选）
+    implementation "com.umeng.umsdk:asms:1.1.4"   // asms包依赖(必选)
+    implementation "com.umeng.umsdk:apm:1.1.0"    //稳定性模块（错误捕获功能）
+
+
+}

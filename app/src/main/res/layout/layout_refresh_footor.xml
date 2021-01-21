@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+
+    <com.cs.eyepetizer.view.TypefaceTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:text="下拉刷新"
+        android:textSize="16dp"
+        android:visibility="visible" />
+
+    <com.cs.eyepetizer.view.TypefaceTextView
+        android:id="@+id/tvNoMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="The End"
+        android:textSize="20dp"
+        android:visibility="invisible"
+        app:typeface="lobsterTypeface"
+        tools:visibility="visible" />
+
+</FrameLayout>

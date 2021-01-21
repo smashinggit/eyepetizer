@@ -1,0 +1,67 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$kotlin_core_ktx"
+
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    implementation "com.google.android.material:material:$material"
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-beta01'
+
+    //Android Jetpack 组件 、协程
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$coroutinesKTX"  //ViewModelScope
+    api "androidx.lifecycle:lifecycle-runtime-ktx:$coroutinesKTX"    //LifeCycleScope
+    api "androidx.lifecycle:lifecycle-livedata-ktx:$coroutinesKTX"
+
+    //常用依赖库
+    api "com.squareup.retrofit2:retrofit:$retrofit"
+    api "com.squareup.retrofit2:converter-gson:$converter_gson"
+    api "com.squareup.okhttp3:logging-interceptor:$logging_interceptor"
+    api "org.ligboy.retrofit2:converter-fastjson-android:$converter_fastjson"
+    api "com.github.bumptech.glide:glide:$glide"
+    kapt "com.github.bumptech.glide:compiler:$glide"
+    api "jp.wasabeef:glide-transformations:4.1.0"
+
+
+    //特定功能依赖库
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary"
+
+}
