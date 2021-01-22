@@ -6,8 +6,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.cs.eyepetizer.R
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
+import com.cs.eyepetizer.view.TabEntity
+import com.flyco.tablayout.CommonTabLayout
+import com.flyco.tablayout.listener.CustomTabEntity
+import com.flyco.tablayout.listener.OnTabSelectListener
 
 /**
  *
@@ -23,10 +25,8 @@ abstract class BaseViewPagerFragment : BaseFragment() {
     }
     protected var mOffscreenPageLimit = 1
 
-    private var mTabLayout: TabLayout? = null   //这是原生的TabLayout,一般都使用自定义的TabLayout
-//    private var mTabLayout: CommonTabLayout? = null    //
-
-    private var mTabTitles: TabLayout? = null
+    //    private var mTabLayout: TabLayout? = null   //这是原生的TabLayout,一般都使用自定义的TabLayout
+    private var mTabLayout: CommonTabLayout? = null
 
 
     override fun onFirstVisible() {
@@ -38,12 +38,6 @@ abstract class BaseViewPagerFragment : BaseFragment() {
         mViewPager?.apply {
             adapter = mAdapter
             offscreenPageLimit = setOffscreenPageLimit()
-
-            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-
-                }
-            })
         }
     }
 
@@ -55,14 +49,42 @@ abstract class BaseViewPagerFragment : BaseFragment() {
     fun setTabTitles(titles: List<String>) {
         if (mTabLayout != null && mViewPager != null) {
 
-            TabLayoutMediator(
-                mTabLayout!!,
-                mViewPager!!,
-                TabLayoutMediator.TabConfigurationStrategy { tab, position ->
-                    tab.text = titles[position]
-                }).apply {
-                attach()
+
+            val tabEntities = arrayListOf<CustomTabEntity>()
+            titles.forEach {
+                tabEntities.add(TabEntity(it))
             }
+
+            mTabLayout?.apply {
+                setTabData(tabEntities)
+                setOnTabSelectListener(object : OnTabSelectListener {
+                    override fun onTabSelect(position: Int) {
+                        mViewPager?.currentItem = position
+                    }
+
+                    override fun onTabReselect(position: Int) {
+                    }
+                })
+            }
+
+
+            mViewPager?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    mTabLayout?.currentTab = position
+                }
+            })
+
+
+            //原生写法
+//            TabLayoutMediator(
+//                mTabLayout!!,
+//                mViewPager!!,
+//                TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+//                    tab.text = titles[position]
+//                }).apply {
+//                attach()
+//            }
         }
     }
 

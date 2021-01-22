@@ -12,15 +12,16 @@ import android.widget.LinearLayout
 import android.widget.LinearLayout.HORIZONTAL
 import androidx.viewpager2.widget.ViewPager2
 import com.cs.common.utils.dp2px
-import com.cs.common.utils.log
 import com.cs.common.utils.screenWidth
-import kotlinx.android.synthetic.main.item_tab_common.view.*
+import com.cs.eyepetizer.R
 
 /**
  *
  * @author  ChenSen
  * @date  2021/1/20
- * @desc  支持水平滑动的 TabLayout,需要配合 ViewPager2 一起使用
+ * @desc  支持水平滑动的 TabLayout,
+ *
+ *  注意：TavView 不要设置背景，否则会导致indicator不显示
  **/
 class SlidingTabLayout : HorizontalScrollView {
 
@@ -34,20 +35,16 @@ class SlidingTabLayout : HorizontalScrollView {
     private var mIsTabSpaceEqual = true    //TabView宽度是否相等
 
     // Title
-    private val TEXT_BOLD_NONE = 0
-    private val TEXT_BOLD_WHEN_SELECT = 1
-    private val TEXT_BOLD_BOTH = 2
-
-    private val mTitleSize = dp2px(6f)
-    private val mTitleSelectColor = Color.BLACK
-    private val mTitleUnSelectColor = Color.LTGRAY
-    private val mTextBold = TEXT_BOLD_NONE  //是否加粗
+    private var mTitleSize = dp2px(16f)
+    private var mTitleSelectColor = Color.BLACK
+    private var mTitleUnSelectColor = Color.GRAY
     private val mTextAllCaps = false
 
 
     // 指示器属性
-    var mIndicatorWidth = 50
+    private var mIndicatorWidth = mTabWidth
     private var mIndicatorHeight = dp2px(2f).toInt()
+    private var mIndicatorColor = Color.BLACK
     private var mIndicatorMarginLeft = dp2px(0f).toInt()
     private var mIndicatorMarginTop = dp2px(0f).toInt()
     private var mIndicatorMarginRight = dp2px(0f).toInt()
@@ -65,6 +62,7 @@ class SlidingTabLayout : HorizontalScrollView {
 
     private var mTabCount = 0
     private var mSelectPosition = 0
+    private var mTextBoundStyle = TabView.TEXT_BOLD_WHEN_SELECT
 
     private var mScrollX = 0              //当前 ScrollView 的移动距离
 
@@ -72,10 +70,6 @@ class SlidingTabLayout : HorizontalScrollView {
     //指示器相关
     private val mIndicatorRect = Rect(0, 0, mIndicatorHeight, mTabWidth) //默认与 TabView宽度一致
 
-    private val mOldIndicatorPosition = Pair(0, 0)  //旧指示器的位置，即当前选中的位置
-    private val mNewIndicatorPosition = Pair(0, 0)  //新位置，即点击新的Tab后的位置
-
-    //    private val mIndicatorAnimator = ValueAnimator.ofObject()
     private val mIndicatorPaint = Paint().apply {
         isAntiAlias = true
         style = Paint.Style.FILL
@@ -94,12 +88,50 @@ class SlidingTabLayout : HorizontalScrollView {
         attrs,
         defStyleAttr
     ) {
+
+        val typedArr =
+            context.obtainStyledAttributes(attrs, R.styleable.SlidingTabLayout)
+
+        mTabMinWidth =
+            typedArr.getDimension(R.styleable.SlidingTabLayout_tabMinWidth, mTabMinWidth.toFloat())
+                .toInt()
+
+        mTitleSize = typedArr.getDimension(R.styleable.SlidingTabLayout_titleTextSize, mTitleSize)
+        mTitleSelectColor =
+            typedArr.getColor(R.styleable.SlidingTabLayout_titleSelectColor, Color.BLACK)
+        mTitleUnSelectColor =
+            typedArr.getColor(R.styleable.SlidingTabLayout_titleUnSelectColor, Color.GRAY)
+
+
+        mIndicatorWidth =
+            typedArr.getDimension(
+                R.styleable.SlidingTabLayout_indicatorWidth,
+                mTabMinWidth.toFloat()
+            ).toInt()
+        mIndicatorHeight =
+            typedArr.getDimension(
+                R.styleable.SlidingTabLayout_indicatorHeight,
+                dp2px(2f)
+            ).toInt()
+
+        mIndicatorMarginLeft =
+            typedArr.getDimension(R.styleable.SlidingTabLayout_indicatorMarginLeft, 0f).toInt()
+        mIndicatorMarginTop =
+            typedArr.getDimension(R.styleable.SlidingTabLayout_indicatorMarginTop, 0f).toInt()
+        mIndicatorMarginRight =
+            typedArr.getDimension(R.styleable.SlidingTabLayout_indicatorMarginTop, 0f).toInt()
+        mIndicatorMarginBottom =
+            typedArr.getDimension(R.styleable.SlidingTabLayout_indicatorMarginBottom, 0f).toInt()
+
+        mIndicatorColor =
+            typedArr.getColor(R.styleable.SlidingTabLayout_indicatorColor, Color.BLACK)
+        mIndicatorPaint.color = mIndicatorColor
+
+        typedArr.recycle()
         initView(context)
     }
 
     private fun initView(context: Context) {
-
-
         isFillViewport = true //设置滚动视图是否可以伸缩其内容以填充视口
         setWillNotDraw(false) //重写onDraw方法,需要调用这个方法来清除flag
 
@@ -111,13 +143,6 @@ class SlidingTabLayout : HorizontalScrollView {
             }
         }
     }
-
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        mIndicatorWidth = mTabWidth
-
-    }
-
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -159,7 +184,7 @@ class SlidingTabLayout : HorizontalScrollView {
             }
 
             override fun onPageSelected(position: Int) {
-                log("onPageSelected $position $mTabWidth  $mIndicatorWidth")
+//                log("onPageSelected $position ")
                 mSelectPosition = position
                 updateUi()
             }
@@ -170,7 +195,6 @@ class SlidingTabLayout : HorizontalScrollView {
      * 设置选中的 Tab
      */
     fun setSelected(position: Int) {
-        log("setSelected $position  mIndicatorWidth ${mIndicatorWidth}")
         mSelectPosition = position
 
         if (mViewPager == null) {
@@ -185,10 +209,8 @@ class SlidingTabLayout : HorizontalScrollView {
      * 设置指示器的尺寸
      */
     fun setIndicatorSize(width: Int, height: Int) {
-
         mIndicatorWidth = width
         mIndicatorHeight = height
-        log("setIndicatorSize mIndicatorHeight $mIndicatorHeight")
         updateIndicatorPosition()
     }
 
@@ -246,11 +268,11 @@ class SlidingTabLayout : HorizontalScrollView {
                 }
             }
 
-            tvTitle.apply {
-                setTextColor(mTitleUnSelectColor)
-                textSize = mTitleSize
-                text = title
-            }
+            setTitle(title)
+            setTitleSize(mTitleSize)
+            setSelectTitleColor(mTitleSelectColor)
+            setUnSelectTitleColor(mTitleUnSelectColor)
+            setTitleBoundStyle(mTextBoundStyle)
 
             setOnClickListener {
                 if (mSelectPosition == position) {
@@ -294,10 +316,9 @@ class SlidingTabLayout : HorizontalScrollView {
     private fun updateIndicatorPosition() {
         val child = mTabContainer.getChildAt(mSelectPosition)
 
-        if (mIndicatorWidth > child.width) {
-            mIndicatorWidth = child.width
+        if (mIndicatorWidth > mTabWidth) {
+            mIndicatorWidth = mTabWidth
         }
-        log("updateIndicatorPosition mIndicatorWidth $mIndicatorWidth  a $mIndicatorWidth")
 
         val margin =
             (child.width - child.paddingLeft - child.paddingRight - mIndicatorWidth) / 2
@@ -308,7 +329,6 @@ class SlidingTabLayout : HorizontalScrollView {
             child.right - margin - mIndicatorMarginRight,
             this@SlidingTabLayout.bottom - mIndicatorMarginBottom
         )
-        log("mIndicatorRect ${mIndicatorRect.flattenToString()}")
     }
 
 }

@@ -2,20 +2,28 @@
 
 # 开眼视频
 
+一款模仿 Eyepetizer | 开眼视频的 开源app
+
+
+> 此项目仅用于学习，相关接口和数据均来自于网络
+
 
 # 项目架构
 
-项目使用 Kotlin 语言开发，
+项目采用 Jetpack + 协程实现的 MVVM 架构,开发语言为 Kotlin 
 
 
-
-# 事件总线
-
+![项目架构](/pic/architecture.png)
 
 
-# 监控及统计-友盟
+# 项目截图
+![screen1](/pic/screen1.jpg)
+![screen2](/pic/screen2.jpg)
+![screen3](/pic/screen3.jpg)
+![screen4](/pic/screen4.jpg)
+![screen5](/pic/screen5.jpg)
+![screen6](/pic/screen6.jpg)
 
-使用友盟SDK进行数据采集与管理、业务监测、用户行为分析、App稳定性监控
 
 # 相关知识点
 
@@ -54,13 +62,19 @@ https 不受影响
 ```
 
 
-
 # 第三方依赖库
 
 [Android智能下拉刷新框架-SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)
-[Android状态栏导航栏库](https://github.com/Zackratos/UltimateBarX)
+[图片加载框架Glide](https://github.com/gyf-dev/ImmersionBar)
+[基于IJKPlayer的多功能视频播放器](https://github.com/CarGuo/GSYVideoPlayer)
+[广告轮播图Banner](https://github.com/youth5201314/banner)
+[事件总线](https://github.com/greenrobot/EventBus)
 [自定义 TabLayout](https://github.com/LillteZheng/FlowHelper)
 [PermissionX 权限请求库](https://github.com/guolindev/PermissionX)
 [TabLayout+ RecyclerView 锚点定位效果](https://github.com/KailuZhang/TabLayoutMediator2)
 [提升H5加载速度框架-VasSonic](https://github.com/Tencent/VasSonic)
 [沉浸式状态栏和沉浸式导航栏管理](https://github.com/gyf-dev/ImmersionBar)
+
+
+# 监控及统计-友盟
+使用友盟SDK进行数据采集与管理、业务监测、用户行为分析、App稳定性监控

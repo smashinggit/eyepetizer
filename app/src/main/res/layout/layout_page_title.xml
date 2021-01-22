@@ -10,24 +10,41 @@
         android:id="@+id/ivCalendar"
         android:layout_width="38.5dp"
         android:layout_height="38.5dp"
-        android:layout_gravity="start"
+        android:layout_gravity="start|center_vertical"
         android:padding="10dp"
         android:src="@drawable/ic_calendar_black_19dp"
         android:visibility="invisible" />
 
-    <com.google.android.material.tabs.TabLayout
+    <!--    <com.google.android.material.tabs.TabLayout-->
+    <!--        android:id="@+id/tabLayout"-->
+    <!--        android:background="@color/colorPrimary"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        app:tabGravity="center"-->
+    <!--        app:tabIndicatorColor="@color/black"-->
+    <!--        app:tabIndicatorFullWidth="false"-->
+    <!--        app:tabIndicatorHeight="3dp"-->
+    <!--        app:tabMode="scrollable"-->
+    <!--        app:tabSelectedTextColor="@color/blackAlpha20"-->
+    <!--        app:tabTextColor="@color/colorTextPrimary" />-->
+
+    <com.flyco.tablayout.CommonTabLayout
         android:id="@+id/tabLayout"
-        android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
-        app:tabGravity="center"
-        app:tabIndicatorColor="@color/black"
-        app:tabIndicatorFullWidth="false"
-        app:tabIndicatorHeight="3dp"
-        app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/blackAlpha20"
-        app:tabTextColor="@color/colorTextPrimary" />
+        app:tl_iconVisible="false"
+        app:tl_indicator_bounce_enable="false"
+        app:tl_indicator_color="@color/colorTextPrimary"
+        app:tl_indicator_height="3dp"
+        app:tl_indicator_margin_bottom="3dp"
+        app:tl_indicator_width="10dp"
+        app:tl_tab_width="66dp"
+        app:tl_textBold="BOTH"
+        app:tl_textSelectColor="@color/colorTextPrimary"
+        app:tl_textUnselectColor="@color/colorTextSecondary"
+        app:tl_textsize="12sp" />
 
     <ImageView
         android:id="@+id/ivSearch"

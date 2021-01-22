@@ -24,4 +24,22 @@
         </attr>
         <attr name="srlTextNothing" />
     </declare-styleable>
+
+    <declare-styleable name="SlidingTabLayout">
+
+        <attr name="tabMinWidth" format="dimension"/>
+
+        <attr name="titleTextSize" format="dimension" />
+        <attr name="titleSelectColor" format="color" />
+        <attr name="titleUnSelectColor" format="color" />
+
+        <attr name="indicatorWidth" format="dimension" />
+        <attr name="indicatorHeight" format="dimension" />
+        <attr name="indicatorMarginLeft" format="dimension" />
+        <attr name="indicatorMarginTop" format="dimension" />
+        <attr name="indicatorMarginRight" format="dimension" />
+        <attr name="indicatorMarginBottom" format="dimension" />
+        <attr name="indicatorColor" format="color" />
+
+    </declare-styleable>
 </resources>

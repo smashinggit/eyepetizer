@@ -185,7 +185,7 @@ class FollowAdapter(val mContext: Context, var mData: List<Follow.Item>) :
         val tvFavorites = view.findViewById<TextView>(R.id.tvFavorites)
         val tvVideoDuration = view.findViewById<TextView>(R.id.tvVideoDuration)
         val ivShare = view.findViewById<ImageView>(R.id.ivShare)
-        val videoPlayer: GSYVideoPlayer = view.findViewById<GSYVideoPlayer>(R.id.videoPlayer)
+        val videoPlayer: GSYVideoPlayer = view.findViewById(R.id.videoPlayer)
     }
 
     companion object {

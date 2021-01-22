@@ -9,6 +9,7 @@ package com.cs.eyepetizer.view.tablayout.listener
 interface ITabView {
 
     fun setTitle(title: String)
+    fun setTitleBoundStyle(style: Int)
     fun setSelectTitleColor(color: Int)
     fun setUnSelectTitleColor(color: Int)
 
@@ -17,4 +18,5 @@ interface ITabView {
     fun onUnSelect(position: Int)
 
 
+    fun setTitleSize(size: Float)
 }

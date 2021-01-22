@@ -1,14 +1,15 @@
 package com.cs.eyepetizer.ui
 
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import androidx.lifecycle.lifecycleScope
-import com.cs.eyepetizer.base.BaseActivity
 import com.cs.common.utils.startActivity
-import com.cs.common.utils.toast
 import com.cs.eyepetizer.R
+import com.cs.eyepetizer.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -48,6 +49,12 @@ class SplashActivity : BaseActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+
         super.onCreate(savedInstanceState)
 
         lifecycleScope.launch {
