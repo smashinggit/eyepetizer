@@ -16,12 +16,12 @@
 
 
 # 项目截图
-![screen1](/pic/screen1.jpg)
-![screen2](/pic/screen2.jpg)
-![screen3](/pic/screen3.jpg)
-![screen4](/pic/screen4.jpg)
-![screen5](/pic/screen5.jpg)
-![screen6](/pic/screen6.jpg)
+![screen1](https://github.com/smashinggit/eyepetizer/blob/master/pic/screen1.jpg)
+![screen2](https://github.com/smashinggit/eyepetizer/blob/master/pic/screen2.jpg)
+![screen3](https://github.com/smashinggit/eyepetizer/blob/master/pic/screen3.jpg)
+![screen4](https://github.com/smashinggit/eyepetizer/blob/master/pic/screen4.jpg)
+![screen5](https://github.com/smashinggit/eyepetizer/blob/master/pic/screen5.jpg)
+![screen6](https://github.com/smashinggit/eyepetizer/blob/master/pic/screen6.jpg)
 
 
 # 相关知识点
@@ -63,26 +63,26 @@ https 不受影响
 
 # 第三方依赖库
 
-[Android智能下拉刷新框架-SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)
+- [Android智能下拉刷新框架-SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)
 
-[图片加载框架Glide](https://github.com/gyf-dev/ImmersionBar)
+- [图片加载框架Glide](https://github.com/gyf-dev/ImmersionBar)
 
-[基于IJKPlayer的多功能视频播放器](https://github.com/CarGuo/GSYVideoPlayer)
+- [基于IJKPlayer的多功能视频播放器](https://github.com/CarGuo/GSYVideoPlayer)
 
-[广告轮播图Banner](https://github.com/youth5201314/banner)
+- [广告轮播图Banner](https://github.com/youth5201314/banner)
 
-[事件总线](https://github.com/greenrobot/EventBus)
+- [事件总线](https://github.com/greenrobot/EventBus)
 
 
-[自定义 TabLayout](https://github.com/LillteZheng/FlowHelper)
+- [自定义 TabLayout](https://github.com/LillteZheng/FlowHelper)
 
-[PermissionX 权限请求库](https://github.com/guolindev/PermissionX)
+- [PermissionX 权限请求库](https://github.com/guolindev/PermissionX)
 
-[TabLayout+ RecyclerView 锚点定位效果](https://github.com/KailuZhang/TabLayoutMediator2)
+- [TabLayout+ RecyclerView 锚点定位效果](https://github.com/KailuZhang/TabLayoutMediator2)
 
-[提升H5加载速度框架-VasSonic](https://github.com/Tencent/VasSonic)
+- [提升H5加载速度框架-VasSonic](https://github.com/Tencent/VasSonic)
 
-[沉浸式状态栏和沉浸式导航栏管理](https://github.com/gyf-dev/ImmersionBar)
+- [沉浸式状态栏和沉浸式导航栏管理](https://github.com/gyf-dev/ImmersionBar)
 
 
 # 监控及统计-友盟
